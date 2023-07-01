@@ -1,0 +1,59 @@
+//{ Driver Code Starts
+#include <bits/stdc++.h>
+using namespace std;
+
+
+// } Driver Code Ends
+class Solution{
+    public:
+    int findSubString(string str)
+    {
+        unordered_set<char> st;
+        
+        for(auto i: str)
+            st.insert(i);
+            
+        unordered_map<char, int> count;
+        
+        int start = 0;
+        int end = 0;
+        
+        int n = st.size();
+            
+        int ans = str.size();
+        
+        while(end < str.size()) {
+            count[str[end]]++;
+            
+            if(count.size() == n) {
+                while(count[str[start]] - 1 != 0) {
+                    count[str[start]]--;
+                    start++;
+                }
+                
+                ans = min(ans, end-start+1);
+            }
+            
+
+            end++;
+        }
+        
+        return ans;   
+    }
+};
+
+//{ Driver Code Starts.
+// Driver code
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+
+        string str;
+        cin >> str;
+        Solution ob;
+        cout << ob.findSubString(str) << endl;
+    }
+    return 0;
+}
+// } Driver Code Ends
